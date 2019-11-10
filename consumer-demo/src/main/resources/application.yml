@@ -1,0 +1,31 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: consumer-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka
+    registry-fetch-interval-seconds: 3
+#user-service:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+    user-service:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+ribbon:
+  ConnectionTimeOut: 500
+  ReadTimeOut: 2000
+feign:
+  hystrix:
+    enabled: true
